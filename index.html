@@ -256,6 +256,27 @@
             </table>
           </div>
         </div>
+
+        <!-- Email Details Section -->
+        <div class="card" id="email-details-section" style="display: none;">
+          <div class="email-details-header">
+            <h2 id="email-subject">Email Subject</h2>
+            <button onclick="closeEmailDetails()" class="icon-button close-details-btn">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <div class="email-meta">
+            <p><strong>From:</strong> <span id="email-from"></span></p>
+            <p><strong>Date:</strong> <span id="email-date"></span></p>
+          </div>
+          <div class="email-body-container">
+            <div id="email-body" class="email-body"></div>
+          </div>
+          <div id="email-attachments" class="attachments" style="display: none;">
+            <h3><i class="fa-solid fa-paperclip"></i> Attachments</h3>
+            <div id="attachment-list" class="attachment-list"></div>
+          </div>
+        </div>
       </main>
 
       <footer>

@@ -710,43 +710,81 @@ footer {
 }
 
 /* Email Modal */
-.email-modal {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+#email-details-section {
+  border: 2px solid var(--primary-color);
+  background: linear-gradient(135deg, 
+    var(--card-bg) 0%,
+    rgba(59, 130, 246, 0.02) 100%
+  );
+  animation: slideInFromBottom 0.3s ease-out;
+}
+
+.email-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.email-details-header h2 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  flex: 1;
+}
+
+.close-details-btn {
+  background-color: var(--error-color) !important;
+  color: white !important;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  z-index: 50;
+  transition: all 0.2s ease;
 }
 
-.email-modal-content {
-  background-color: var(--card-bg);
-  padding: 2rem;
-  border-radius: 1rem;
-  max-width: 800px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: var(--shadow-lg);
-}
-
-.email-modal h2 {
-  margin-bottom: 1rem;
-  color: var(--text-color);
+.close-details-btn:hover {
+  background-color: #DC2626 !important;
+  transform: scale(1.1);
 }
 
 .email-meta {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.email-meta p {
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.email-meta strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.email-body-container {
+  margin: 1.5rem 0;
 }
 
 .email-body {
   color: var(--text-color);
   line-height: 1.6;
+  background-color: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  max-height: 400px;
+  overflow-y: auto;
+  font-size: 0.95rem;
 }
 
 .attachments {
@@ -755,11 +793,22 @@ footer {
   border-top: 1px solid var(--border-color);
 }
 
+.attachments h3 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.attachments h3 i {
+  color: var(--primary-color);
+}
+
 .attachment-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 0.75rem;
 }
 
 .attachment-link {
@@ -767,15 +816,34 @@ footer {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: var(--bg-color);
+  background-color: var(--primary-color);
+  color: white;
   border-radius: 0.375rem;
-  color: var(--text-color);
   text-decoration: none;
   transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .attachment-link:hover {
-  background-color: var(--border-color);
+  background-color: var(--accent-color);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.attachment-link i {
+  font-size: 0.875rem;
+}
+
+/* Animation for email details */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive Design */
@@ -824,12 +892,27 @@ footer {
     padding: 1.5rem;
   }
 
-  .email-modal {
-    padding: 1rem;
+  .email-details-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
   }
 
-  .email-modal-content {
-    padding: 1.5rem;
+  .email-details-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .close-details-btn {
+    align-self: flex-end;
+  }
+
+  .email-body {
+    max-height: 300px;
+    font-size: 0.875rem;
+  }
+
+  .attachment-list {
+    flex-direction: column;
   }
 }
 
@@ -916,25 +999,6 @@ button i {
 }
 
 /* Modal close button */
-.email-modal .close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-  padding: 0.5rem;
-  transition: color 0.2s ease;
-}
-
-.email-modal .close-btn:hover {
-  color: var(--error-color);
-}
-
-.email-modal .close-btn i {
-  font-size: 1.25rem;
-}
 
 /* Header Content */
 .header-content {

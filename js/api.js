@@ -259,37 +259,44 @@ async function viewEmail(id) {
 
 // Show email modal
 function showEmailModal(email) {
-    const modal = document.createElement('div');
-    modal.className = 'email-modal';
-    modal.innerHTML = `
-        <div class="email-modal-content">
-            <button class="close-btn" onclick="this.closest('.email-modal').remove()">
-                <i class="fa-solid fa-times"></i>
-            </button>
-            <h2>${email.mail_subject}</h2>
-            <div class="email-meta">
-                <p><strong>From:</strong> ${email.mail_from}</p>
-                <p><strong>Date:</strong> ${new Date(email.mail_timestamp * 1000).toLocaleString()}</p>
-            </div>
-            <div class="email-body">
-                ${email.mail_body}
-            </div>
-            ${email.mail_attachments?.length ? `
-                <div class="attachments">
-                    <h3>Attachments</h3>
-                    <div class="attachment-list">
-                        ${email.mail_attachments.map(att => `
-                            <a href="#" onclick="downloadAttachment('${email.mail_id}', '${att.name}')" class="attachment-link">
-                                <i class="fa-solid fa-paperclip"></i>
-                                ${att.name}
-                            </a>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
-        </div>
-    `;
-    document.body.appendChild(modal);
+    const detailsSection = document.getElementById('email-details-section');
+    const subjectElement = document.getElementById('email-subject');
+    const fromElement = document.getElementById('email-from');
+    const dateElement = document.getElementById('email-date');
+    const bodyElement = document.getElementById('email-body');
+    const attachmentsSection = document.getElementById('email-attachments');
+    const attachmentList = document.getElementById('attachment-list');
+    
+    // Populate email details
+    subjectElement.textContent = email.mail_subject;
+    fromElement.textContent = email.mail_from;
+    dateElement.textContent = new Date(email.mail_timestamp * 1000).toLocaleString();
+    bodyElement.innerHTML = email.mail_body;
+    
+    // Handle attachments
+    if (email.mail_attachments?.length) {
+        attachmentList.innerHTML = email.mail_attachments.map(att => `
+            <a href="#" onclick="downloadAttachment('${email.mail_id}', '${att.name}')" class="attachment-link">
+                <i class="fa-solid fa-paperclip"></i>
+                ${att.name}
+            </a>
+        `).join('');
+        attachmentsSection.style.display = 'block';
+    } else {
+        attachmentsSection.style.display = 'none';
+    }
+    
+    // Show the details section
+    detailsSection.style.display = 'block';
+    
+    // Scroll to the details section
+    detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Close email details
+function closeEmailDetails() {
+    const detailsSection = document.getElementById('email-details-section');
+    detailsSection.style.display = 'none';
 }
 
 // Download attachment
@@ -406,3 +413,4 @@ window.refreshMail = refreshMail;
 window.viewEmail = viewEmail;
 window.deleteEmail = deleteEmail;
 window.downloadAttachment = downloadAttachment;
+window.closeEmailDetails = closeEmailDetails;
