@@ -1,0 +1,30 @@
+{
+  "name": "temp-mail-v2",
+  "version": "2.0.0",
+  "description": "TempMail V2 - Secure & Disposable Email Service",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/",
+    "dev": "live-server --port=3000 --open=/",
+    "serve": "live-server --port=3000 --open=/"
+  },
+  "keywords": [
+    "temp-mail",
+    "disposable-email",
+    "privacy",
+    "email-service"
+  ],
+  "author": "Mehmet Kahya",
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mehmetkahya0/temp-mail.git"
+  },
+  "homepage": "https://mehmetkahya0.github.io/temp-mail/",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
